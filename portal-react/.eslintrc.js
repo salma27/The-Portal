@@ -1,5 +1,5 @@
 module.exports = {
-  parser: "@babel/eslint-parser",
+  parser: '@typescript-eslint/parser', // 👈 tells ESLint to understand TypeScript
   env: {
     browser: true,
     commonjs: true,
@@ -15,11 +15,17 @@ module.exports = {
     },
     sourceType: "module",
   },
-  plugins: ["react", "react-hooks"],
+  plugins: [
+    "react", 
+    "react-hooks",
+    '@typescript-eslint',
+  ],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    'react-app',
+    'plugin:@typescript-eslint/recommended',
   ],
   settings: {
     react: {
@@ -29,7 +35,7 @@ module.exports = {
   rules: {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-
+    'no-unused-vars': 'off',
     // You can do more rule customizations here...
   },
 };

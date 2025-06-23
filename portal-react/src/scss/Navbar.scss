@@ -1,0 +1,16 @@
+nav{
+    padding: 10px 20px;
+    font-size: 15px;
+    border-bottom: 1px;
+    border-color: transparent;
+    box-shadow: 0px 5px 5px rgb(146, 145, 145);
+    padding: 20px;
+    a{
+        margin: 20px;
+        font-weight:400;
+        &:hover{
+            cursor: default;
+            font-weight: 800;
+        }
+    }
+}
