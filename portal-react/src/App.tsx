@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import {options} from './data';
-import './interfaces';
+import type { ElementRoute } from "./interfaces";
 import {routes} from './routes';
 const App: React.FC = () => {
   

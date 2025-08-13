@@ -1,11 +1,18 @@
-interface Option {
-  label: string;
-  id: number;
-  ref: string;
+export interface DropdownItem {
+  label: string
+  id: string
+  href: string
 }
 
-interface ElementRoute {
-  path: string;
-  id: number;
-  element: any;
+export interface Option {
+  label: string
+  id: string
+  href?: string
+  dropdown?: DropdownItem[]
+}
+
+export interface ElementRoute {
+  path: string
+  id: number
+  element: any
 }
