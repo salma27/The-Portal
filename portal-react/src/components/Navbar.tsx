@@ -70,6 +70,11 @@ const Navbar: React.FC<NavbarProps> = ({ options = [] }) => {
               )}
             </div>
           ))}
+
+        {/* Talk to Expert Button - Desktop */}
+        <a href="#contact" className="navbar__cta-button">
+          Talk to an Expert
+        </a>
       </div>
 
       {/* Mobile Menu Toggle */}
@@ -112,6 +117,11 @@ const Navbar: React.FC<NavbarProps> = ({ options = [] }) => {
               )}
             </div>
           ))}
+
+        {/* Talk to Expert Button - Mobile */}
+        <a href="#contact" className="navbar__mobile-cta-button" onClick={closeMobileMenu}>
+          Talk to an Expert
+        </a>
       </div>
     </nav>
   )

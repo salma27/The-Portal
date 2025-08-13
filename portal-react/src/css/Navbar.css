@@ -1,5 +1,6 @@
 .navbar {
   padding: 0 40px;
+  width: -webkit-fill-available;
   height: 70px;
   display: flex;
   align-items: center;
@@ -46,6 +47,28 @@
   transform: translateY(-1px);
 }
 
+/* CTA Button Styles */
+.navbar__cta-button {
+  background-color: #4872C9;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.navbar__cta-button:hover {
+  background-color: #374151;
+  border-color: #374151;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.3);
+}
+
 .navbar__dropdown-arrow {
   font-size: 12px;
   transition: transform 0.2s ease;
@@ -64,12 +87,14 @@
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  min-width: 220px;
+  min-width: 280px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.2s ease;
   z-index: 1001;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .navbar__item:hover .navbar__dropdown {
@@ -89,6 +114,7 @@
   letter-spacing: normal;
   transition: all 0.2s ease;
   border-bottom: 1px solid #f3f4f6;
+  white-space: nowrap;
 }
 
 .navbar__dropdown-item:last-child {
@@ -99,6 +125,11 @@
   background-color: #f9fafb;
   color: #1f2937;
   padding-left: 20px;
+}
+
+/* Special styling for Spare Parts dropdown (largest) */
+.navbar__item:first-child .navbar__dropdown {
+  min-width: 320px;
 }
 
 /* Mobile Menu Styles */
@@ -171,6 +202,29 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+/* Mobile CTA Button */
+.navbar__mobile-cta-button {
+  background-color: #1f2937;
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  margin-top: 8px;
+  border: 2px solid #1f2937;
+}
+
+.navbar__mobile-cta-button:hover {
+  background-color: #374151;
+  border-color: #374151;
+  transform: translateY(-1px);
+}
+
 .navbar__mobile-dropdown {
   max-height: 0;
   overflow: hidden;
@@ -181,7 +235,7 @@
 }
 
 .navbar__mobile-dropdown.active {
-  max-height: 300px;
+  max-height: 500px;
 }
 
 .navbar__mobile-dropdown-item {
@@ -220,6 +274,7 @@
   .navbar {
     padding: 0 20px;
     justify-content: space-between;
+    width: fit-content;
   }
 
   .navbar__links {
@@ -245,6 +300,7 @@
 @media (max-width: 480px) {
   .navbar {
     padding: 0 16px;
+    width: fit-content;
     height: 60px;
   }
 
@@ -256,12 +312,18 @@
     font-size: 14px;
     padding: 10px 12px;
   }
+
+  .navbar__mobile-cta-button {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
 }
 
 /* Tablet Styles */
 @media (max-width: 1024px) and (min-width: 769px) {
   .navbar {
     padding: 0 30px;
+    width: fit-content;
   }
 
   .navbar__links {
@@ -271,5 +333,10 @@
   .navbar__link {
     font-size: 18px;
     padding: 6px 12px;
+  }
+
+  .navbar__cta-button {
+    font-size: 13px;
+    padding: 8px 16px;
   }
 }
