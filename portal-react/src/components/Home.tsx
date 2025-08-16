@@ -86,12 +86,15 @@ const Home: React.FC = () => {
       </div>
 
       {/* Featured Products Section */}
+      <div id="our-purpose" className="our-purpose-section">
+        
       <Carousel
         items={featuredProducts}
         title="Featured Products"
         description="Discover our premium electrical solutions designed for industrial excellence and reliability."
         type="featured-products"
       />
+      </div>
     </>
   )
 }

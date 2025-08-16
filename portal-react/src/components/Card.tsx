@@ -1,7 +1,8 @@
 import type React from "react"
 import type { CardProps } from "../interfaces"
+import "../css/Card.css"
 
-const Card: React.FC<CardProps> = ({ item, type = "service" }) => {
+const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
   const handleClick = () => {
     window.open(item.href, "_blank", "noopener,noreferrer")
   }
@@ -11,7 +12,7 @@ const Card: React.FC<CardProps> = ({ item, type = "service" }) => {
     window.open(item.href, "_blank", "noopener,noreferrer")
   }
 
-  if (type === "product") {
+  if (type === "featured-products") {
     return (
       <div className="product-card">
         <div className="product-card__image-container">

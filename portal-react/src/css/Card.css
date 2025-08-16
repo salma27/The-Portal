@@ -1,39 +1,4 @@
-.carousel {
-  overflow: hidden;
-}
-
-.carousel__title {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 60px;
-  line-height: 1.2;
-  padding: 0 40px;
-}
-
-.carousel-description {
-  font-size: 1.3rem;
-  color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 60px;
-  max-width: 800px;
-  margin: 0 auto 60px;
-  text-align: center;
-}
-
-/* Our Purpose Carousel (No gaps) */
-.carousel__container {
-  width: 100%;
-  overflow: hidden;
-}
-
-.carousel__grid {
-  display: flex;
-  width: 100%;
-  height: 300px;
-}
-
+/* Service Cards (Our Purpose) */
 .service-card {
   position: relative;
   flex: 1;
@@ -102,62 +67,7 @@
   white-space: nowrap;
 }
 
-/* Featured Products Carousel (With gaps and navigation) */
-.carousel--featured-products {
-  padding: 80px 40px;
-  background-color: #ffffff;
-}
-
-.carousel__wrapper {
-  position: relative;
-  max-width: 95%;
-  margin: 0 auto;
-}
-
-.carousel__track {
-  overflow: hidden;
-}
-
-.carousel__slides {
-  display: flex;
-  transition: transform 0.3s ease;
-}
-
-.carousel__slide {
-  flex: 0 0 23%;
-  padding: 0 15px;
-}
-
-.carousel__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 252, 82, 0.9);
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  color: #1f2937;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-.carousel__nav:hover {
-  background-color: rgba(255, 252, 82, 1);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel__nav--prev {
-  left: -25px;
-}
-
-.carousel__nav--next {
-  right: -25px;
-}
-
-/* Product Cards */
+/* Product Cards (Featured Products) */
 .product-card {
   background-color: #ffffff;
   border-radius: 12px;
@@ -232,44 +142,10 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .carousel__slide {
-    flex: 0 0 33.333%;
-  }
-  .carousel__nav--prev {
-    left: -20px;
-  }
-  .carousel__nav--next {
-    right: -20px;
-  }
-}
-
 @media (max-width: 768px) {
-  .carousel__title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    padding: 0 20px;
-  }
-  .carousel-description {
-    font-size: 1.1rem;
-  }
-  .carousel__grid {
-    height: 200px;
-  }
   .service-card__label {
     font-size: 1.4rem;
     padding: 0 15px;
-  }
-  .carousel--featured-products {
-    padding: 50px 20px;
-  }
-  .carousel__slide {
-    flex: 0 0 50%;
-  }
-  .carousel__nav {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
   }
   .product-card {
     height: 350px;
@@ -277,18 +153,6 @@
 }
 
 @media (max-width: 480px) {
-  .carousel__title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    padding: 0 16px;
-  }
-  .carousel-description {
-    font-size: 1rem;
-  }
-  .carousel__grid {
-    height: 180px;
-    flex-direction: column;
-  }
   .service-card {
     flex: none;
     height: 45px;
@@ -297,18 +161,6 @@
     font-size: 1rem;
     padding: 0 10px;
     white-space: normal;
-  }
-  .carousel--featured-products {
-    padding: 40px 16px;
-  }
-  .carousel__slide {
-    flex: 0 0 100%;
-    padding: 0 10px;
-  }
-  .carousel__nav {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
   }
   .product-card {
     height: 320px;
