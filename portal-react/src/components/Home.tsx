@@ -3,16 +3,10 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import "../css/Home.css"
+import Carousel from "./Carousel"
+import { words, ourPurposeCaroueslItems, featuredProducts } from "../data"
 
 const Home: React.FC = () => {
-  const words = [
-    "MV SWITCHGEAR",
-    "MV TRANSFORMERS",
-    "LV SWITCHGEAR",
-    "MV SERVICE",
-    "LV SERVICE",
-    "MV SPARE PARTS"
-  ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [displayText, setDisplayText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
@@ -49,32 +43,55 @@ const Home: React.FC = () => {
     return () => clearTimeout(timeout)
   }, [displayText, isTyping, currentWordIndex, words])
 
+  const scrollToOurPurpose = () => {
+    const ourPurposeSection = document.getElementById("our-purpose")
+    if (ourPurposeSection) {
+      ourPurposeSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  }
+
   return (
     <>
       {/* Video Banner */}
       <div className="video-banner">
-        {/* TODO: Replace with your actual video file */}
         <video className="video-banner__video" autoPlay muted loop>
-          <source src="/your-video-here.mp4" type="video/mp4" />
+          <source src="/assets/home/hero-video.mp4" type="video/mp4" />
         </video>
         <div className="video-banner__text-overlay">
-          <h1 className="video-banner__static-text">UPGRADING YOUR ELECTRICAL NETWORK WITH HIGH QUALITY 
+          <h1 className="video-banner__static-text">
+            UPGRADING YOUR ELECTRICAL NETWORK WITH HIGH QUALITY
             <span className="video-banner__animated-text"> {displayText}</span>
           </h1>
         </div>
+
+        {/* Scroll Down Button */}
+        <button className="scroll-down-button" onClick={scrollToOurPurpose} aria-label="Scroll to Our Purpose section">
+          <div className="scroll-down-arrow"></div>
+        </button>
       </div>
 
-      {/* Rest of your content */}
-      <div className="home-container">
-        <h1 className="home-heading">Industrial Solutions Excellence</h1>
-        <p className="home-subheading">
-          Your trusted partner for comprehensive spare parts, maintenance services, quality products, and advanced
-          retrofit solutions. Delivering reliability and innovation for over two decades.
-        </p>
-        <a href="#spare-parts" className="home-cta-button">
-          Explore Our Services
-        </a>
+      {/* Our Purpose Section */}
+      <div id="our-purpose" className="our-purpose-section">
+        <div className="our-purpose-container">
+          <Carousel
+            items={ourPurposeCaroueslItems}
+            title="Our Purpose"
+            description="We excell at what makes the perfect, reliable and sustainable electrical network."
+            type="our-purpose"
+          />
+        </div>
       </div>
+
+      {/* Featured Products Section */}
+      <Carousel
+        items={featuredProducts}
+        title="Featured Products"
+        description="Discover our premium electrical solutions designed for industrial excellence and reliability."
+        type="featured-products"
+      />
     </>
   )
 }

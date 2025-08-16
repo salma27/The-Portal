@@ -2,7 +2,7 @@
 .video-banner {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 92vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   width: 90%;
-  max-width: 800px;
+  max-width: 60%;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -39,16 +39,176 @@
 .video-banner__static-text {
   margin: 0;
   line-height: 1.2;
+  text-align: left;
 }
 
 .video-banner__animated-text {
   color: #fffc52;
-  font-size: 2.5rem;
   font-weight: bold;
-  min-height: 60px;
+  min-height: 77px;
+  display: flex;
+}
+
+/* Scroll Down Button Styles */
+.scroll-down-button {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 252, 82, 0.9);
+  border: none;
+  border-radius: 8px;
+  width: 110px;
+  height: 35px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.scroll-down-button:hover {
+  background: rgba(255, 252, 82, 1);
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-down-arrow {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 16px solid #1f2937;
+}
+
+/* Our Purpose Section Styles */
+.our-purpose-section {
+  min-height: 100vh;
+  /* display: flex;
+  align-items: center; */
+}
+
+.our-purpose-container {
+  padding-top: 10vh;
+  text-align: center;
+}
+
+.our-purpose-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.our-purpose-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.value-item {
+  padding: 40px 30px;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.value-item h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+.value-item p {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Additional Video Section Styles */
+.additional-video-section {
+  padding: 80px 40px;
+  background-color: #f8fafc;
+}
+
+.additional-video-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.additional-video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.additional-video:hover {
+  transform: translateY(-5px);
+}
+
+.additional-video-content {
+  padding: 20px 0;
+}
+
+.additional-video-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.additional-video-description {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.additional-video-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffc52;
+  border-radius: 50%;
+}
+
+.feature-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
 }
 
 /* Home Content Styles */
@@ -99,6 +259,23 @@
 }
 
 /* Responsive Styles */
+@media (max-width: 1024px) {
+  .additional-video-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .additional-video-title {
+    font-size: 2rem;
+  }
+
+  .our-purpose-values {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .video-banner {
     height: 50vh;
@@ -111,6 +288,35 @@
   }
 
   .video-banner__animated-text {
+    font-size: 1.8rem;
+  }
+
+  .scroll-down-button {
+    width: 70px;
+    height: 45px;
+    bottom: 20px;
+  }
+
+  .scroll-down-arrow {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 14px solid #1f2937;
+  }
+
+  .our-purpose-section {
+    padding: 80px 20px;
+  }
+
+  .our-purpose-title {
+    font-size: 2.5rem;
+  }
+
+
+  .additional-video-section {
+    padding: 60px 20px;
+  }
+
+  .additional-video-title {
     font-size: 1.8rem;
   }
 
@@ -139,6 +345,52 @@
   .video-banner__animated-text {
     font-size: 1.4rem;
     min-height: 40px;
+  }
+
+  .scroll-down-button {
+    width: 60px;
+    height: 40px;
+    bottom: 15px;
+  }
+
+  .scroll-down-arrow {
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #1f2937;
+  }
+
+  .our-purpose-section {
+    padding: 60px 16px;
+  }
+
+  .our-purpose-title {
+    font-size: 2rem;
+  }
+
+  .value-item {
+    padding: 30px 20px;
+  }
+
+  .additional-video-section {
+    padding: 40px 16px;
+  }
+
+  .additional-video-title {
+    font-size: 1.5rem;
+  }
+
+  .additional-video-features {
+    gap: 12px;
+  }
+
+  .feature-item {
+    padding: 8px 0;
+  }
+
+  .feature-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
   }
 
   .home-heading {
