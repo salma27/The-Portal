@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import "../css/Navbar.css"
 import type { Option } from "../interfaces"
 
+
 interface NavbarProps {
   options?: Option[]
 }
@@ -44,6 +45,14 @@ const Navbar: React.FC<NavbarProps> = ({ options = [] }) => {
 
   return (
     <nav className="navbar">
+      {/* Logo */}
+      <div className="navbar__logo">
+        <a href="/home">
+          <img src="/assets/proserve-logo.png" alt="Proserve Logo" className="navbar__logo-img" />
+
+        </a>
+      </div>
+
       {/* Desktop Links */}
       <div className="navbar__links">
         {options?.length &&
