@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { options } from "./data"
 import type { ElementRoute } from "./interfaces"
 import { routes } from "./routes"
+import CarouselCardPage from "./components/CarouselCardPage"
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
         <Routes>
           {/* Default route - redirect to /home */}
           <Route path="/" element={<Navigate to="/home" replace />} />
-
+          <Route path="/:cardId" element={<CarouselCardPage />} />
           {routes?.map((route: ElementRoute) => {
             return <Route key={route.id} path={route.path} element={route.element} />
           })}

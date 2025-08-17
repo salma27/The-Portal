@@ -1,12 +1,14 @@
 import type React from "react"
 import type { CardProps } from "../interfaces"
 import "../css/Card.css"
+import { useNavigate } from "react-router-dom"
 
 const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
-  const handleClick = () => {
-    window.open(item.href, "_blank", "noopener,noreferrer")
-  }
+  const navigate = useNavigate()
 
+  const handleClick = () => {
+    navigate(`/${item.id}`, { state: { cardData: item } })
+  }
   const handleLearnMore = (e: React.MouseEvent) => {
     e.stopPropagation()
     window.open(item.href, "_blank", "noopener,noreferrer")

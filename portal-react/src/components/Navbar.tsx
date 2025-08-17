@@ -60,10 +60,10 @@ const Navbar: React.FC<NavbarProps> = ({ options = [] }) => {
             <div key={option.id} className="navbar__item">
               {option.dropdown ? (
                 <>
-                  <span className="navbar__link">
+                  <a className="navbar__link" href={option.href}>
                     {option.label}
                     <span className="navbar__dropdown-arrow">▼</span>
-                  </span>
+                  </a>
                   <div className="navbar__dropdown">
                     {option.dropdown.map((item) => (
                       <a key={item.id} href={item.href} className="navbar__dropdown-item">

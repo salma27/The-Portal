@@ -1,5 +1,4 @@
-import type { Option } from "./interfaces"
-import type {CarouselItem} from "./interfaces"
+import type {Option, CarouselItem, Card} from "./interfaces"
 
 export const words = ["MV SWITCHGEAR", "MV TRANSFORMERS", "LV SWITCHGEAR", "MV SERVICE", "LV SERVICE", "MV SPARE PARTS"]
 
@@ -55,12 +54,36 @@ export const options: Option[] = [
   },
 ]
 
+
+export const sparePartsSection: Card[] = [
+  { id: "mv-circuit-breakers", 
+    label: "Medium Voltage Circuit Breakers", 
+    href: "/spare-parts/mv-circuit-breakers",
+    image: "string",
+    description: "string"
+  },
+  
+  // { id: "protection-relays", label: "Protection Relays", href: "/spare-parts/protection-relays" },
+  //     { id: "air-load-break-switches", label: "Air Load Break Switches", href: "/spare-parts/air-load-break-switches" },
+  //     {
+  //       id: "sf6-insulated-load-break-switch",
+  //       label: "SF6 Insulated Load Break Switch",
+  //       href: "/spare-parts/sf6-insulated-load-break-switch",
+  //     },
+  //     { id: "instrument-transformers", label: "Instrument Transformers", href: "/spare-parts/instrument-transformers" },
+  //     { id: "insulators", label: "Insulators", href: "/spare-parts/insulators" },
+  //     { id: "contacts", label: "Contacts", href: "/spare-parts/contacts" },
+  //     { id: "panel-accessories", label: "Panel Accessories", href: "/spare-parts/panel-accessories" },
+    
+]
+
 export const ourPurposeCaroueslItems: CarouselItem[] = [
     {
       id: "spare-parts",
       label: "Spare Parts",
       image: "/assets/home/spare-part.png?height=250&width=350&text=Spare-parts",
-      href: "#spare-parts", // You can update this later
+      href: "/spare-parts", // You can update this later
+      sections: sparePartsSection
     },
     {
       id: "maintenance",

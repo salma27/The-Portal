@@ -17,12 +17,21 @@ export interface ElementRoute {
   element: any
 }
 
+export interface Card{
+  id: string
+  label: string
+  image: string
+  href: string
+  description?: string
+}
+
 export interface CarouselItem {
   id: string
   label: string
   image: string
   href: string
   description?: string
+  sections?:Card[]
 }
 
 export interface CarouselProps {
