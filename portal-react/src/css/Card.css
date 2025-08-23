@@ -6,6 +6,7 @@
   cursor: pointer;
   transition: transform 0.3s ease;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .service-card:hover {
@@ -77,6 +78,8 @@
   height: 400px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .product-card:hover {
@@ -146,6 +149,10 @@
   padding: 80px 40px;
   background-color: #f8fafc;
   min-height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .card-grid__title {
@@ -155,6 +162,7 @@
   color: #1f2937;
   margin-bottom: 20px;
   line-height: 1.2;
+  max-width: 100%;
 }
 
 .card-grid__description {
@@ -162,13 +170,12 @@
   font-size: 1.2rem;
   color: #6b7280;
   line-height: 1.6;
-  margin-bottom: 60px;
+  margin: 0 auto 60px;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .card-grid__container {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -177,23 +184,55 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 30px;
+  width: 100%;
 }
 
 .card-grid__item {
   display: flex;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+  .card-grid {
+    padding: 80px 80px;
+  }
+
   .card-grid__items {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 40px;
   }
 }
 
-@media (max-width: 768px) {
+/* Desktop (1200px - 1399px) */
+@media (max-width: 1399px) and (min-width: 1200px) {
   .card-grid {
-    padding: 60px 20px;
+    padding: 80px 60px;
+  }
+
+  .card-grid__items {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
+  }
+}
+
+/* Medium Desktop (1024px - 1199px) */
+@media (max-width: 1199px) and (min-width: 1024px) {
+  .card-grid {
+    padding: 80px 40px;
+  }
+
+  .card-grid__items {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .card-grid {
+    padding: 60px 30px;
   }
 
   .card-grid__title {
@@ -207,20 +246,52 @@
   }
 
   .card-grid__items {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+  }
+
+  .product-card {
+    height: 380px;
+  }
+
+  .service-card__label {
+    font-size: 1.6rem;
+    padding: 0 15px;
+  }
+}
+
+/* Mobile Large (481px - 767px) */
+@media (max-width: 767px) and (min-width: 481px) {
+  .card-grid {
+    padding: 50px 20px;
+  }
+
+  .card-grid__title {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+
+  .card-grid__description {
+    font-size: 1rem;
+    margin-bottom: 35px;
+  }
+
+  .card-grid__items {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
+  }
+
+  .product-card {
+    height: 350px;
   }
 
   .service-card__label {
     font-size: 1.4rem;
     padding: 0 15px;
   }
-
-  .product-card {
-    height: 350px;
-  }
 }
 
+/* Mobile (320px - 480px) */
 @media (max-width: 480px) {
   .card-grid {
     padding: 40px 16px;
@@ -241,12 +312,6 @@
     gap: 16px;
   }
 
-  .service-card__label {
-    font-size: 1rem;
-    padding: 0 10px;
-    white-space: normal;
-  }
-
   .product-card {
     height: 320px;
   }
@@ -254,9 +319,16 @@
   .product-card__content {
     padding: 15px;
   }
+
+  .service-card__label {
+    font-size: 1rem;
+    padding: 0 10px;
+    white-space: normal;
+  }
 }
 
-@media (max-width: 360px) {
+/* Mobile Small (below 360px) */
+@media (max-width: 359px) {
   .card-grid {
     padding: 30px 12px;
   }
@@ -282,31 +354,13 @@
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .service-card__label {
-    font-size: 1.4rem;
-    padding: 0 15px;
-  }
-  .product-card {
-    height: 350px;
-  }
+/* Ensure no horizontal overflow */
+* {
+  box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
-  .service-card {
-    flex: none;
-    height: 45px;
-  }
-  .service-card__label {
-    font-size: 1rem;
-    padding: 0 10px;
-    white-space: normal;
-  }
-  .product-card {
-    height: 320px;
-  }
-  .product-card__content {
-    padding: 15px;
-  }
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
