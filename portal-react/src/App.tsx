@@ -3,37 +3,38 @@
 import "./App.css"
 import Navbar from "./components/Navbar"
 import type React from "react"
-import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 import { options } from "./data"
-import type { ElementRoute } from "./interfaces"
 import { routes } from "./routes"
 import CarouselCardPage from "./components/CarouselCardPage"
 
-// Wrapper component to extract URL params and pass to CarouselCardPage
-const CarouselCardPageWrapper: React.FC = () => {
-  const { cardId } = useParams<{ cardId: string }>()
-  return <CarouselCardPage categoryId={cardId || ""} />
-}
-
+/**
+ * Main application component that handles routing and layout
+ */
 const App: React.FC = () => {
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="app">
+        {/* Global Navigation */}
         <Navbar options={options} />
-        <Routes>
-          {/* Default route - redirect to /home */}
-          <Route path="/" element={<Navigate to="/home" replace />} />
 
-          {/* Dynamic route for category pages */}
-          <Route path="/:cardId" element={<CarouselCardPageWrapper />} />
+        {/* Main Content Area */}
+        <main className="app__content">
+          <Routes>
+            {/* Default route */}
+            <Route path="/" element={<Navigate to="/home" replace />} />
 
-          {/* Static routes from routes.tsx */}
-          {routes?.map((route: ElementRoute) => {
-            return <Route key={route.id} path={route.path} element={route.element} />
-          })}
-        </Routes>
-      </Router>
-    </>
+            {/* Static routes */}
+            {routes.map((route) => (
+              <Route key={route.id} path={route.path} element={route.element} />
+            ))}
+
+            {/* Dynamic category routes - handles infinite nesting */}
+            <Route path="/*" element={<CarouselCardPage />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   )
 }
 

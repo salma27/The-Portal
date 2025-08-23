@@ -23,6 +23,7 @@ export interface Card {
   image: string
   href: string
   description?: string
+  items?: Card[] // Infinite nesting - can contain more cards with their own items
 }
 
 export interface CarouselItem {
@@ -43,5 +44,5 @@ export interface CarouselProps {
 
 export interface CardProps {
   item: CarouselItem | Card
-  type?: "our-purpose" | "featured-products" | "section"
+  type?: "our-purpose" | "featured-products" | "section" | "detail"
 }
