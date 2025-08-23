@@ -1,26 +1,43 @@
+"use client"
+
 import type React from "react"
-import { useParams, useLocation } from "react-router-dom"
-import "../css/Home.css"
-import Carousel from "./Carousel"
-import { words, ourPurposeCaroueslItems, featuredProducts } from "../data"
-import type { Card as CardType } from "../interfaces"
+import { useParams } from "react-router-dom"
 import Card from "./Card"
+import { ourPurposeCaroueslItems } from "../data"
+import "../css/Card.css"
 
-const CarouselCardPage: React.FC = () => {
+interface CarouselCardPageProps {
+  categoryId: string
+}
+
+const CarouselCardPage: React.FC<CarouselCardPageProps> = ({ categoryId }) => {
   const { cardId } = useParams()
-  const location = useLocation()
-  const cardData = location.state?.cardData
+  const category = ourPurposeCaroueslItems.find((item) => item.id === categoryId || item.id === cardId)
 
-  if (!cardData) {
-    return <h2>No card data found</h2>
+  if (!category || !category.sections) {
+    return (
+      <div className="card-grid">
+        <h2 className="card-grid__title">Category not found or coming soon</h2>
+        <p className="card-grid__description">This category will be available soon with detailed sections.</p>
+      </div>
+    )
   }
 
   return (
-    <div>
-      <h1>{cardData?.label}</h1>
-      {cardData?.sections?.map((section: CardType) => (
-        <Card key={section?.id} item={section} type="featured-products" />
-      ))}
+    <div className="card-grid">
+      <h2 className="card-grid__title">{category.label}</h2>
+      <p className="card-grid__description">
+        Explore our comprehensive {category.label.toLowerCase()} solutions designed for industrial excellence.
+      </p>
+      <div className="card-grid__container">
+        <div className="card-grid__items">
+          {category.sections.map((item) => (
+            <div key={item.id} className="card-grid__item">
+              <Card item={item} type="section" />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

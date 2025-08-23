@@ -17,7 +17,7 @@ export interface ElementRoute {
   element: any
 }
 
-export interface Card{
+export interface Card {
   id: string
   label: string
   image: string
@@ -31,7 +31,7 @@ export interface CarouselItem {
   image: string
   href: string
   description?: string
-  sections?:Card[]
+  sections?: Card[]
 }
 
 export interface CarouselProps {
@@ -42,6 +42,6 @@ export interface CarouselProps {
 }
 
 export interface CardProps {
-  item: CarouselItem
-  type?: "our-purpose" | "featured-products"
+  item: CarouselItem | Card
+  type?: "our-purpose" | "featured-products" | "section"
 }

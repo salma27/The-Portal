@@ -1,3 +1,5 @@
+"use client"
+
 import type React from "react"
 import type { CardProps } from "../interfaces"
 import "../css/Card.css"
@@ -7,24 +9,31 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`/${item.id}`, { state: { cardData: item } })
+    if (type === "section") {
+      // For section cards, navigate to the href directly
+      window.location.href = item.href
+    } else {
+      // For carousel cards, navigate to category page
+      navigate(`/${item.id}`, { state: { cardData: item } })
+    }
   }
+
   const handleLearnMore = (e: React.MouseEvent) => {
     e.stopPropagation()
     window.open(item.href, "_blank", "noopener,noreferrer")
   }
 
-  if (type === "featured-products") {
+  if (type === "featured-products" || type === "section") {
     return (
-      <div className="product-card">
+      <div className="product-card" onClick={type === "section" ? handleClick : undefined}>
         <div className="product-card__image-container">
           <img src={item.image || "/placeholder.svg"} alt={item.label} className="product-card__image" />
         </div>
         <div className="product-card__content">
           <h3 className="product-card__title">{item.label}</h3>
           <p className="product-card__description">{item.description}</p>
-          <button className="product-card__button" onClick={handleLearnMore}>
-            Learn More
+          <button className="product-card__button" onClick={type === "section" ? handleClick : handleLearnMore}>
+            {type === "section" ? "View Details" : "Learn More"}
           </button>
         </div>
       </div>

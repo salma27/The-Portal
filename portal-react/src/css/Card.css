@@ -141,6 +141,147 @@
   color: #ffffff;
 }
 
+/* Card Grid Styles */
+.card-grid {
+  padding: 80px 40px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.card-grid__title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.card-grid__description {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-grid__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card-grid__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.card-grid__item {
+  display: flex;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .card-grid__items {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    padding: 60px 20px;
+  }
+
+  .card-grid__title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .card-grid__description {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
+
+  .card-grid__items {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .service-card__label {
+    font-size: 1.4rem;
+    padding: 0 15px;
+  }
+
+  .product-card {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    padding: 40px 16px;
+  }
+
+  .card-grid__title {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .card-grid__description {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .card-grid__items {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-card__label {
+    font-size: 1rem;
+    padding: 0 10px;
+    white-space: normal;
+  }
+
+  .product-card {
+    height: 320px;
+  }
+
+  .product-card__content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .card-grid {
+    padding: 30px 12px;
+  }
+
+  .card-grid__title {
+    font-size: 1.8rem;
+  }
+
+  .card-grid__description {
+    font-size: 0.95rem;
+  }
+
+  .product-card {
+    height: 300px;
+  }
+
+  .product-card__title {
+    font-size: 1.1rem;
+  }
+
+  .product-card__description {
+    font-size: 0.85rem;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .service-card__label {
