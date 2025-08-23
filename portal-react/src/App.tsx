@@ -1,5 +1,3 @@
-"use client"
-
 import "./App.css"
 import Navbar from "./components/Navbar"
 import type React from "react"
@@ -7,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { options } from "./data"
 import { routes } from "./routes"
 import CarouselCardPage from "./components/CarouselCardPage"
+import ProductDetails from "./components/ProductDetails"
 
 /**
  * Main application component that handles routing and layout
@@ -28,6 +27,9 @@ const App: React.FC = () => {
             {routes.map((route) => (
               <Route key={route.id} path={route.path} element={route.element} />
             ))}
+
+            {/* Product details route */}
+            <Route path="/product-details/:productId" element={<ProductDetails />} />
 
             {/* Dynamic category routes - handles infinite nesting */}
             <Route path="/*" element={<CarouselCardPage />} />

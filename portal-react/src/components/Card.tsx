@@ -13,8 +13,8 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
         // Navigate to the next level
         navigate(`${item.href}`, { state: { cardData: item } })
       } else {
-        // No more nested items, open external link
-        window.open(item.href, "_blank", "noopener,noreferrer")
+        // No more nested items, navigate to ProductDetails page
+        navigate(`/product-details/${item.id}`, { state: { productData: item } })
       }
     } else {
       // For carousel cards, navigate to category page
@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
     }
   }
 
-  const handleLearnMore = (e: React.MouseEvent) => {
+  const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     if (type === "section" || type === "detail") {
       // Check if this item has nested items
@@ -30,30 +30,30 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
         // Navigate to the next level
         navigate(`${item.href}`, { state: { cardData: item } })
       } else {
-        // No more nested items, open external link
-        window.open(item.href, "_blank", "noopener,noreferrer")
+        // No more nested items, navigate to ProductDetails page
+        navigate(`/product-details/${item.id}`, { state: { productData: item } })
       }
     } else {
-      // Open in new tab
-      window.open(item.href, "_blank", "noopener,noreferrer")
+      // Featured products navigate to ProductDetails
+      navigate(`/product-details/${item.id}`, { state: { productData: item } })
     }
   }
 
-  // Consistent button text - always "View Details" for navigation, "Learn More" for external links
+  // Switched button text logic
   const getButtonText = () => {
     if (type === "featured-products") {
-      return "Learn More" // Featured products always open external links
+      return "View Details" // Featured products show details page
     }
 
     if (type === "section" || type === "detail") {
       if ("items" in item && item.items && item.items.length > 0) {
-        return "View Details" // Has more levels to navigate
+        return "Learn More" // Has more levels to navigate
       } else {
-        return "Learn More" // Final level - opens external link
+        return "View Details" // Final level - shows product details
       }
     }
 
-    return "Learn More" // Default fallback
+    return "View Details" // Default fallback
   }
 
   if (type === "featured-products" || type === "section" || type === "detail") {
@@ -65,7 +65,7 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
         <div className="product-card__content">
           <h3 className="product-card__title">{item.label}</h3>
           <p className="product-card__description">{item.description}</p>
-          <button className="product-card__button" onClick={handleLearnMore}>
+          <button className="product-card__button" onClick={handleButtonClick}>
             {getButtonText()}
           </button>
         </div>

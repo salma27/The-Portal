@@ -23,6 +23,9 @@ export interface Card {
   image: string
   href: string
   description?: string
+  fullDescription?: string // Full paragraph description for ProductDetails
+  keywords?: string[] // Keywords for the product
+  advantages?: string[] // List of advantages
   items?: Card[] // Infinite nesting - can contain more cards with their own items
 }
 
