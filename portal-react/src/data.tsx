@@ -63,17 +63,53 @@ export const sparePartsSection: Card[] = [
     description: "string"
   },
   
-  // { id: "protection-relays", label: "Protection Relays", href: "/spare-parts/protection-relays" },
-  //     { id: "air-load-break-switches", label: "Air Load Break Switches", href: "/spare-parts/air-load-break-switches" },
-  //     {
-  //       id: "sf6-insulated-load-break-switch",
-  //       label: "SF6 Insulated Load Break Switch",
-  //       href: "/spare-parts/sf6-insulated-load-break-switch",
-  //     },
-  //     { id: "instrument-transformers", label: "Instrument Transformers", href: "/spare-parts/instrument-transformers" },
-  //     { id: "insulators", label: "Insulators", href: "/spare-parts/insulators" },
-  //     { id: "contacts", label: "Contacts", href: "/spare-parts/contacts" },
-  //     { id: "panel-accessories", label: "Panel Accessories", href: "/spare-parts/panel-accessories" },
+  { id: "protection-relays", 
+    label: "Protection Relays", 
+    href: "/spare-parts/protection-relays",
+    image: "string",
+    description: "string"
+   },
+  { id: "air-load-break-switches", 
+    label: "Air Load Break Switches", 
+    href: "/spare-parts/air-load-break-switches",
+    image: "string",
+    description: "string" 
+  },
+  {
+    id: "sf6-insulated-load-break-switch",
+    label: "SF6 Insulated Load Break Switch",
+    href: "/spare-parts/sf6-insulated-load-break-switch",
+    image: "string",
+    description: "string"
+  },
+  { 
+    id: "instrument-transformers", 
+    label: "Instrument Transformers", 
+    href: "/spare-parts/instrument-transformers",
+    image: "string",
+    description: "string" 
+  },
+  { 
+    id: "insulators", 
+    label: "Insulators", 
+    href: "/spare-parts/insulators",
+    image: "string",
+    description: "string"
+  },
+  { 
+    id: "contacts", 
+    label: "Contacts", 
+    href: "/spare-parts/contacts",
+    image: "string",
+    description: "string" 
+  },
+  { 
+    id: "panel-accessories", 
+    label: "Panel Accessories", 
+    href: "/spare-parts/panel-accessories",
+    image: "string",
+    description: "string" 
+  },
     
 ]
 
