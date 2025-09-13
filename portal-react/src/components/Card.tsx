@@ -7,6 +7,7 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
+    
     if (type === "section" || type === "detail") {
       // Check if this item has nested items
       if ("items" in item && item.items && item.items.length > 0) {
@@ -14,7 +15,8 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
         navigate(`${item.href}`, { state: { cardData: item } })
       } else {
         // No more nested items, navigate to ProductDetails page
-        navigate(`/product-details/${item.id}`, { state: { productData: item } })
+        console.log("item: ", item);
+        navigate(`${item.href}`, { state: { productData: item } })
       }
     } else {
       // For carousel cards, navigate to category page
@@ -58,7 +60,7 @@ const Card: React.FC<CardProps> = ({ item, type = "our-purpose" }) => {
 
   if (type === "featured-products" || type === "section" || type === "detail") {
     return (
-      <div className="product-card" onClick={handleClick}>
+      <div className="product-card" /*onClick={handleClick}*/>
         <div className="product-card__image-container">
           <img src={item.image || "/placeholder.svg"} alt={item.label} className="product-card__image" />
         </div>

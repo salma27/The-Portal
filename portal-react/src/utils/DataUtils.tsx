@@ -26,7 +26,7 @@ export const findProductById = (productId: string): Card | null => {
       image: featuredResult.image,
       href: featuredResult.href,
       description: featuredResult.description,
-      fullDescription: featuredResult.description, // Use description as fallback
+      //fullDescription: featuredResult.description, // Use description as fallback
       keywords: ["Featured Product", "Industrial", "Electrical"],
       advantages: [
         "High-quality construction and materials",
