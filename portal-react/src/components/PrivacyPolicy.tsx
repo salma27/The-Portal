@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useNavigate } from "react-router-dom"
+import Footer from "./Footer"
 import "../css/LegalPages.css"
 
 const PrivacyPolicy: React.FC = () => {
@@ -13,17 +14,25 @@ const PrivacyPolicy: React.FC = () => {
 
   return (
     <div className="legal-page">
-      <div className="legal-page__container">
-        {/* Header */}
-        <header className="legal-page__header">
+      {/* Hero Section */}
+      <div className="legal-page__hero">
+        <div className="legal-page__hero-content">
           <button className="legal-page__back-button" onClick={handleBackClick} aria-label="Go back">
-            ← Back
+            ← Back to Website
           </button>
           <h1 className="legal-page__title">Privacy Policy</h1>
+          <p className="legal-page__subtitle">Your Privacy Matters to Us</p>
           <p className="legal-page__effective-date">Effective Date: January 1, 2024</p>
-        </header>
+        </div>
+      </div>
 
-        {/* Content */}
+      {/* Main Content */}
+      <div className="legal-page__container">
+        {/* Breadcrumb */}
+        <div className="legal-page__breadcrumb">
+          <a href="/home">Home</a> / <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+
         <div className="legal-page__content">
           <section className="legal-page__section">
             <p className="legal-page__intro">
@@ -119,7 +128,7 @@ const PrivacyPolicy: React.FC = () => {
             <p>If you have questions, contact us at:</p>
             <div className="legal-page__contact">
               <p>
-                <strong>ProServe</strong>
+                <strong>ProServe Industrial Solutions</strong>
               </p>
               <p>Trivium Square, First Floor, Office 119</p>
               <p>North 90 Street, New Cairo, Cairo</p>
@@ -139,6 +148,9 @@ const PrivacyPolicy: React.FC = () => {
           </section>
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
