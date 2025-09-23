@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import Footer from "./Footer"
 import "../css/AdminPage.css"
 import type { Option, CarouselItem, Card } from "../interfaces"
 import { options as initialOptions, ourPurposeCaroueslItems, featuredProducts, sparePartsSection } from "../data"
@@ -363,8 +364,15 @@ const AdminPage: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <div className="admin-login">
+        {/* Video Background */}
+        <video className="admin-login__video" autoPlay muted loop>
+          <source src="/assets/home/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className="admin-login__overlay"></div>
+
         <div className="admin-login__container">
-          <h1 className="admin-login__title">Admin Login</h1>
+          <h1 className="admin-login__title">Admin Panel</h1>
+          <p className="admin-login__subtitle">ProServe Website Management</p>
           <div className="admin-login__form">
             <input
               type="password"
@@ -375,10 +383,10 @@ const AdminPage: React.FC = () => {
               onKeyPress={(e) => e.key === "Enter" && handleLogin()}
             />
             <button onClick={handleLogin} className="admin-login__button">
-              Login
+              Access Admin Panel
             </button>
           </div>
-          <p className="admin-login__hint">Hint: admin123</p>
+          <p className="admin-login__hint">💡 Demo Password: admin123</p>
         </div>
       </div>
     )
@@ -394,444 +402,469 @@ const AdminPage: React.FC = () => {
         onCancel={hideConfirmDialog}
       />
 
-      <div className="admin-header">
-        <h1 className="admin-header__title">Website Admin Panel</h1>
-        <div className="admin-header__actions">
-          <button onClick={exportData} className="admin-button admin-button--secondary">
-            Export Data
-          </button>
-          <label className="admin-button admin-button--secondary">
-            Import Data
-            <input type="file" accept=".json" onChange={importData} style={{ display: "none" }} />
-          </label>
-          <button onClick={handleLogout} className="admin-button admin-button--danger">
-            Logout
-          </button>
+      {/* Hero Section - Exactly like Home Page */}
+      <div className="admin-hero">
+        <video className="admin-hero__video" autoPlay muted loop>
+          <source src="/assets/home/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div className="admin-hero__overlay"></div>
+        <div className="admin-hero__content">
+          <h1 className="admin-hero__title">Website Administration</h1>
+          <p className="admin-hero__subtitle">ProServe Management System</p>
+          <div className="admin-hero__actions">
+            <button onClick={exportData} className="admin-button admin-button--secondary">
+              Export Data
+            </button>
+            <label className="admin-button admin-button--secondary">
+              Import Data
+              <input type="file" accept=".json" onChange={importData} style={{ display: "none" }} />
+            </label>
+            <button onClick={handleLogout} className="admin-button admin-button--danger">
+              Logout
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="admin-tabs">
-        <button
-          className={`admin-tab ${activeTab === "navbar" ? "active" : ""}`}
-          onClick={() => setActiveTab("navbar")}
-        >
-          Navbar Management
-        </button>
-        <button className={`admin-tab ${activeTab === "cards" ? "active" : ""}`} onClick={() => setActiveTab("cards")}>
-          Cards Management
-        </button>
-        <button
-          className={`admin-tab ${activeTab === "overview" ? "active" : ""}`}
-          onClick={() => setActiveTab("overview")}
-        >
-          Overview
-        </button>
-      </div>
+      {/* Main Section - Like Our Purpose */}
+      <div className="admin-main-section">
+        <div className="admin-main-container">
+          <h2 className="admin-main-title">Content Management</h2>
+          <p className="admin-main-description">
+            Manage your website content, navigation, and settings with our comprehensive administration tools.
+          </p>
 
-      <div className="admin-content">
-        {activeTab === "navbar" && (
-          <div className="admin-section">
-            <h2 className="admin-section__title">Navbar Options</h2>
+          {/* Tabs */}
+          <div className="admin-tabs">
+            <button
+              className={`admin-tab ${activeTab === "navbar" ? "active" : ""}`}
+              onClick={() => setActiveTab("navbar")}
+            >
+              Navigation
+            </button>
+            <button
+              className={`admin-tab ${activeTab === "cards" ? "active" : ""}`}
+              onClick={() => setActiveTab("cards")}
+            >
+              Content Cards
+            </button>
+            <button
+              className={`admin-tab ${activeTab === "overview" ? "active" : ""}`}
+              onClick={() => setActiveTab("overview")}
+            >
+              Overview
+            </button>
+          </div>
 
-            <div className="admin-form">
-              <h3>{editingItem ? "Edit Navbar Option" : "Add New Navbar Option"}</h3>
-              <div className="admin-form__row">
-                <input
-                  type="text"
-                  placeholder="ID (e.g., spare-parts)"
-                  value={navbarForm.id}
-                  onChange={(e) => setNavbarForm({ ...navbarForm, id: e.target.value })}
-                  className="admin-input"
-                />
-                <input
-                  type="text"
-                  placeholder="Label (e.g., Spare Parts)"
-                  value={navbarForm.label}
-                  onChange={(e) => setNavbarForm({ ...navbarForm, label: e.target.value })}
-                  className="admin-input"
-                />
-                <input
-                  type="text"
-                  placeholder="Href (e.g., /spare-parts)"
-                  value={navbarForm.href}
-                  onChange={(e) => setNavbarForm({ ...navbarForm, href: e.target.value })}
-                  className="admin-input"
-                />
-              </div>
+          {/* Content */}
+          <div className="admin-content">
+            {activeTab === "navbar" && (
+              <div className="admin-section">
+                <h3 className="admin-section__title">Navigation Management</h3>
 
-              <div className="admin-form__row">
-                <label className="admin-checkbox">
-                  <input
-                    type="checkbox"
-                    checked={navbarForm.hasDropdown}
-                    onChange={(e) => setNavbarForm({ ...navbarForm, hasDropdown: e.target.checked })}
-                  />
-                  Has Dropdown Menu
-                </label>
-              </div>
-
-              {navbarForm.hasDropdown && (
-                <div className="admin-dropdown-items">
-                  <h4>Dropdown Items</h4>
-                  {navbarForm.dropdownItems.map((item, index) => (
-                    <div key={index} className="admin-form__row">
+                <div className="admin-form">
+                  <h4>{editingItem ? "Edit Navigation Item" : "Add New Navigation Item"}</h4>
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="ID (e.g., spare-parts)"
+                      value={navbarForm.id}
+                      onChange={(e) => setNavbarForm({ ...navbarForm, id: e.target.value })}
+                      className="admin-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Label (e.g., Spare Parts)"
+                      value={navbarForm.label}
+                      onChange={(e) => setNavbarForm({ ...navbarForm, label: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Href (e.g., /spare-parts)"
+                      value={navbarForm.href}
+                      onChange={(e) => setNavbarForm({ ...navbarForm, href: e.target.value })}
+                      className="admin-input"
+                    />
+                    <label className="admin-checkbox">
                       <input
-                        type="text"
-                        placeholder="Item ID"
-                        value={item.id}
-                        onChange={(e) => {
-                          const newItems = [...navbarForm.dropdownItems]
-                          newItems[index].id = e.target.value
-                          setNavbarForm({ ...navbarForm, dropdownItems: newItems })
-                        }}
-                        className="admin-input"
+                        type="checkbox"
+                        checked={navbarForm.hasDropdown}
+                        onChange={(e) => setNavbarForm({ ...navbarForm, hasDropdown: e.target.checked })}
                       />
-                      <input
-                        type="text"
-                        placeholder="Item Label"
-                        value={item.label}
-                        onChange={(e) => {
-                          const newItems = [...navbarForm.dropdownItems]
-                          newItems[index].label = e.target.value
-                          setNavbarForm({ ...navbarForm, dropdownItems: newItems })
-                        }}
-                        className="admin-input"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Item Href"
-                        value={item.href}
-                        onChange={(e) => {
-                          const newItems = [...navbarForm.dropdownItems]
-                          newItems[index].href = e.target.value
-                          setNavbarForm({ ...navbarForm, dropdownItems: newItems })
-                        }}
-                        className="admin-input"
-                      />
+                      Has Dropdown Menu
+                    </label>
+                  </div>
+
+                  {navbarForm.hasDropdown && (
+                    <div className="admin-dropdown-items">
+                      <h4>Dropdown Items</h4>
+                      {navbarForm.dropdownItems.map((item, index) => (
+                        <div key={index} className="admin-form__row">
+                          <input
+                            type="text"
+                            placeholder="Item ID"
+                            value={item.id}
+                            onChange={(e) => {
+                              const newItems = [...navbarForm.dropdownItems]
+                              newItems[index].id = e.target.value
+                              setNavbarForm({ ...navbarForm, dropdownItems: newItems })
+                            }}
+                            className="admin-input"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Item Label"
+                            value={item.label}
+                            onChange={(e) => {
+                              const newItems = [...navbarForm.dropdownItems]
+                              newItems[index].label = e.target.value
+                              setNavbarForm({ ...navbarForm, dropdownItems: newItems })
+                            }}
+                            className="admin-input"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Item Href"
+                            value={item.href}
+                            onChange={(e) => {
+                              const newItems = [...navbarForm.dropdownItems]
+                              newItems[index].href = e.target.value
+                              setNavbarForm({ ...navbarForm, dropdownItems: newItems })
+                            }}
+                            className="admin-input"
+                          />
+                          <button
+                            onClick={() => {
+                              const newItems = navbarForm.dropdownItems.filter((_, i) => i !== index)
+                              setNavbarForm({ ...navbarForm, dropdownItems: newItems })
+                            }}
+                            className="admin-button admin-button--danger admin-button--small"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
                       <button
-                        onClick={() => {
-                          const newItems = navbarForm.dropdownItems.filter((_, i) => i !== index)
-                          setNavbarForm({ ...navbarForm, dropdownItems: newItems })
-                        }}
-                        className="admin-button admin-button--danger admin-button--small"
+                        onClick={() =>
+                          setNavbarForm({
+                            ...navbarForm,
+                            dropdownItems: [...navbarForm.dropdownItems, { id: "", label: "", href: "" }],
+                          })
+                        }
+                        className="admin-button admin-button--secondary"
                       >
-                        Remove
+                        Add Dropdown Item
                       </button>
+                    </div>
+                  )}
+
+                  <div className="admin-form__actions">
+                    {editingItem ? (
+                      <>
+                        <button onClick={updateNavbarOption} className="admin-button admin-button--primary">
+                          Update Option
+                        </button>
+                        <button
+                          onClick={() => {
+                            setEditingItem(null)
+                            resetNavbarForm()
+                          }}
+                          className="admin-button admin-button--secondary"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <button onClick={addNavbarOption} className="admin-button admin-button--primary">
+                        Add Option
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className="admin-list">
+                  <h3>Current Navigation Options</h3>
+                  {adminData.options.map((option) => (
+                    <div key={option.id} className="admin-list__item">
+                      <div className="admin-list__content">
+                        <h4>{option.label}</h4>
+                        <p>ID: {option.id}</p>
+                        <p>Href: {option.href}</p>
+                        {option.dropdown && <p>Dropdown: {option.dropdown.length} items</p>}
+                      </div>
+                      <div className="admin-list__actions">
+                        <button
+                          onClick={() => editNavbarOption(option)}
+                          className="admin-button admin-button--secondary admin-button--small"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteNavbarOption(option.id, option.label)}
+                          className="admin-button admin-button--danger admin-button--small"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   ))}
-                  <button
-                    onClick={() =>
-                      setNavbarForm({
-                        ...navbarForm,
-                        dropdownItems: [...navbarForm.dropdownItems, { id: "", label: "", href: "" }],
-                      })
-                    }
-                    className="admin-button admin-button--secondary"
-                  >
-                    Add Dropdown Item
-                  </button>
                 </div>
-              )}
-
-              <div className="admin-form__actions">
-                {editingItem ? (
-                  <>
-                    <button onClick={updateNavbarOption} className="admin-button admin-button--primary">
-                      Update Option
-                    </button>
-                    <button
-                      onClick={() => {
-                        setEditingItem(null)
-                        resetNavbarForm()
-                      }}
-                      className="admin-button admin-button--secondary"
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button onClick={addNavbarOption} className="admin-button admin-button--primary">
-                    Add Option
-                  </button>
-                )}
               </div>
-            </div>
+            )}
 
-            <div className="admin-list">
-              <h3>Current Navbar Options</h3>
-              {adminData.options.map((option) => (
-                <div key={option.id} className="admin-list__item">
-                  <div className="admin-list__content">
-                    <h4>{option.label}</h4>
-                    <p>ID: {option.id}</p>
-                    <p>Href: {option.href}</p>
-                    {option.dropdown && <p>Dropdown: {option.dropdown.length} items</p>}
+            {activeTab === "cards" && (
+              <div className="admin-section">
+                <h3 className="admin-section__title">Content Cards Management</h3>
+
+                <div className="admin-form">
+                  <h4>{editingItem ? "Edit Content Card" : "Add New Content Card"}</h4>
+                  <div className="admin-form__row">
+                    <select
+                      value={cardForm.type}
+                      onChange={(e) =>
+                        setCardForm({
+                          ...cardForm,
+                          type: e.target.value as "our-purpose" | "featured-products" | "spare-parts",
+                        })
+                      }
+                      className="admin-select"
+                    >
+                      <option value="our-purpose">Our Purpose</option>
+                      <option value="featured-products">Featured Products</option>
+                      <option value="spare-parts">Spare Parts</option>
+                    </select>
                   </div>
-                  <div className="admin-list__actions">
-                    <button
-                      onClick={() => editNavbarOption(option)}
-                      className="admin-button admin-button--secondary admin-button--small"
-                    >
-                      Edit
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Card ID"
+                      value={cardForm.id}
+                      onChange={(e) => setCardForm({ ...cardForm, id: e.target.value })}
+                      className="admin-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Card Label"
+                      value={cardForm.label}
+                      onChange={(e) => setCardForm({ ...cardForm, label: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Image URL"
+                      value={cardForm.image}
+                      onChange={(e) => setCardForm({ ...cardForm, image: e.target.value })}
+                      className="admin-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Href"
+                      value={cardForm.href}
+                      onChange={(e) => setCardForm({ ...cardForm, href: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Description"
+                      value={cardForm.description}
+                      onChange={(e) => setCardForm({ ...cardForm, description: e.target.value })}
+                      className="admin-textarea"
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Full Description (optional)"
+                      value={cardForm.fullDescription}
+                      onChange={(e) => setCardForm({ ...cardForm, fullDescription: e.target.value })}
+                      className="admin-textarea"
+                      rows={4}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Keywords (comma separated)"
+                      value={cardForm.keywords}
+                      onChange={(e) => setCardForm({ ...cardForm, keywords: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Advantages (one per line)"
+                      value={cardForm.advantages}
+                      onChange={(e) => setCardForm({ ...cardForm, advantages: e.target.value })}
+                      className="admin-textarea"
+                      rows={4}
+                    />
+                  </div>
+
+                  <div className="admin-form__actions">
+                    {editingItem ? (
+                      <>
+                        <button onClick={updateCard} className="admin-button admin-button--primary">
+                          Update Card
+                        </button>
+                        <button
+                          onClick={() => {
+                            setEditingItem(null)
+                            resetCardForm()
+                          }}
+                          className="admin-button admin-button--secondary"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <button onClick={addCard} className="admin-button admin-button--primary">
+                        Add Card
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className="admin-cards-grid">
+                  <div className="admin-cards-section">
+                    <h3>Our Purpose Cards ({adminData.ourPurposeItems.length})</h3>
+                    {adminData.ourPurposeItems.map((card) => (
+                      <div key={card.id} className="admin-list__item">
+                        <div className="admin-list__content">
+                          <h4>{card.label}</h4>
+                          <p>{card.description}</p>
+                        </div>
+                        <div className="admin-list__actions">
+                          <button
+                            onClick={() => editCard(card, "our-purpose")}
+                            className="admin-button admin-button--secondary admin-button--small"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => deleteCard(card.id, "our-purpose", card.label)}
+                            className="admin-button admin-button--danger admin-button--small"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="admin-cards-section">
+                    <h3>Featured Products ({adminData.featuredProducts.length})</h3>
+                    {adminData.featuredProducts.map((card) => (
+                      <div key={card.id} className="admin-list__item">
+                        <div className="admin-list__content">
+                          <h4>{card.label}</h4>
+                          <p>{card.description}</p>
+                        </div>
+                        <div className="admin-list__actions">
+                          <button
+                            onClick={() => editCard(card, "featured-products")}
+                            className="admin-button admin-button--secondary admin-button--small"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => deleteCard(card.id, "featured-products", card.label)}
+                            className="admin-button admin-button--danger admin-button--small"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="admin-cards-section">
+                    <h3>Spare Parts ({adminData.sparePartsSection.length})</h3>
+                    {adminData.sparePartsSection.map((card) => (
+                      <div key={card.id} className="admin-list__item">
+                        <div className="admin-list__content">
+                          <h4>{card.label}</h4>
+                          <p>{card.description}</p>
+                        </div>
+                        <div className="admin-list__actions">
+                          <button
+                            onClick={() => editCard(card, "spare-parts")}
+                            className="admin-button admin-button--secondary admin-button--small"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => deleteCard(card.id, "spare-parts", card.label)}
+                            className="admin-button admin-button--danger admin-button--small"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === "overview" && (
+              <div className="admin-section">
+                <h3 className="admin-section__title">Website Overview</h3>
+                <div className="admin-stats">
+                  <div className="admin-stat">
+                    <h3>Navigation Items</h3>
+                    <p className="admin-stat__number">{adminData.options.length}</p>
+                  </div>
+                  <div className="admin-stat">
+                    <h3>Our Purpose Cards</h3>
+                    <p className="admin-stat__number">{adminData.ourPurposeItems.length}</p>
+                  </div>
+                  <div className="admin-stat">
+                    <h3>Featured Products</h3>
+                    <p className="admin-stat__number">{adminData.featuredProducts.length}</p>
+                  </div>
+                  <div className="admin-stat">
+                    <h3>Spare Parts</h3>
+                    <p className="admin-stat__number">{adminData.sparePartsSection.length}</p>
+                  </div>
+                </div>
+
+                <div className="admin-actions">
+                  <h3>Quick Actions</h3>
+                  <div className="admin-actions__grid">
+                    <button onClick={() => setActiveTab("navbar")} className="admin-button admin-button--primary">
+                      Manage Navigation
                     </button>
-                    <button
-                      onClick={() => deleteNavbarOption(option.id, option.label)}
-                      className="admin-button admin-button--danger admin-button--small"
-                    >
-                      Delete
+                    <button onClick={() => setActiveTab("cards")} className="admin-button admin-button--primary">
+                      Manage Content
+                    </button>
+                    <button onClick={exportData} className="admin-button admin-button--secondary">
+                      Export All Data
+                    </button>
+                    <button onClick={() => navigate("/home")} className="admin-button admin-button--secondary">
+                      View Website
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
-        )}
-
-        {activeTab === "cards" && (
-          <div className="admin-section">
-            <h2 className="admin-section__title">Cards Management</h2>
-
-            <div className="admin-form">
-              <h3>{editingItem ? "Edit Card" : "Add New Card"}</h3>
-              <div className="admin-form__row">
-                <select
-                  value={cardForm.type}
-                  onChange={(e) =>
-                    setCardForm({
-                      ...cardForm,
-                      type: e.target.value as "our-purpose" | "featured-products" | "spare-parts",
-                    })
-                  }
-                  className="admin-select"
-                >
-                  <option value="our-purpose">Our Purpose</option>
-                  <option value="featured-products">Featured Products</option>
-                  <option value="spare-parts">Spare Parts</option>
-                </select>
-              </div>
-
-              <div className="admin-form__row">
-                <input
-                  type="text"
-                  placeholder="Card ID"
-                  value={cardForm.id}
-                  onChange={(e) => setCardForm({ ...cardForm, id: e.target.value })}
-                  className="admin-input"
-                />
-                <input
-                  type="text"
-                  placeholder="Card Label"
-                  value={cardForm.label}
-                  onChange={(e) => setCardForm({ ...cardForm, label: e.target.value })}
-                  className="admin-input"
-                />
-              </div>
-
-              <div className="admin-form__row">
-                <input
-                  type="text"
-                  placeholder="Image URL"
-                  value={cardForm.image}
-                  onChange={(e) => setCardForm({ ...cardForm, image: e.target.value })}
-                  className="admin-input"
-                />
-                <input
-                  type="text"
-                  placeholder="Href"
-                  value={cardForm.href}
-                  onChange={(e) => setCardForm({ ...cardForm, href: e.target.value })}
-                  className="admin-input"
-                />
-              </div>
-
-              <div className="admin-form__row">
-                <textarea
-                  placeholder="Description"
-                  value={cardForm.description}
-                  onChange={(e) => setCardForm({ ...cardForm, description: e.target.value })}
-                  className="admin-textarea"
-                  rows={3}
-                />
-              </div>
-
-              <div className="admin-form__row">
-                <textarea
-                  placeholder="Full Description (optional)"
-                  value={cardForm.fullDescription}
-                  onChange={(e) => setCardForm({ ...cardForm, fullDescription: e.target.value })}
-                  className="admin-textarea"
-                  rows={4}
-                />
-              </div>
-
-              <div className="admin-form__row">
-                <input
-                  type="text"
-                  placeholder="Keywords (comma separated)"
-                  value={cardForm.keywords}
-                  onChange={(e) => setCardForm({ ...cardForm, keywords: e.target.value })}
-                  className="admin-input"
-                />
-              </div>
-
-              <div className="admin-form__row">
-                <textarea
-                  placeholder="Advantages (one per line)"
-                  value={cardForm.advantages}
-                  onChange={(e) => setCardForm({ ...cardForm, advantages: e.target.value })}
-                  className="admin-textarea"
-                  rows={4}
-                />
-              </div>
-
-              <div className="admin-form__actions">
-                {editingItem ? (
-                  <>
-                    <button onClick={updateCard} className="admin-button admin-button--primary">
-                      Update Card
-                    </button>
-                    <button
-                      onClick={() => {
-                        setEditingItem(null)
-                        resetCardForm()
-                      }}
-                      className="admin-button admin-button--secondary"
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button onClick={addCard} className="admin-button admin-button--primary">
-                    Add Card
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <div className="admin-cards-grid">
-              <div className="admin-cards-section">
-                <h3>Our Purpose Cards ({adminData.ourPurposeItems.length})</h3>
-                {adminData.ourPurposeItems.map((card) => (
-                  <div key={card.id} className="admin-list__item">
-                    <div className="admin-list__content">
-                      <h4>{card.label}</h4>
-                      <p>{card.description}</p>
-                    </div>
-                    <div className="admin-list__actions">
-                      <button
-                        onClick={() => editCard(card, "our-purpose")}
-                        className="admin-button admin-button--secondary admin-button--small"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => deleteCard(card.id, "our-purpose", card.label)}
-                        className="admin-button admin-button--danger admin-button--small"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="admin-cards-section">
-                <h3>Featured Products ({adminData.featuredProducts.length})</h3>
-                {adminData.featuredProducts.map((card) => (
-                  <div key={card.id} className="admin-list__item">
-                    <div className="admin-list__content">
-                      <h4>{card.label}</h4>
-                      <p>{card.description}</p>
-                    </div>
-                    <div className="admin-list__actions">
-                      <button
-                        onClick={() => editCard(card, "featured-products")}
-                        className="admin-button admin-button--secondary admin-button--small"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => deleteCard(card.id, "featured-products", card.label)}
-                        className="admin-button admin-button--danger admin-button--small"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="admin-cards-section">
-                <h3>Spare Parts ({adminData.sparePartsSection.length})</h3>
-                {adminData.sparePartsSection.map((card) => (
-                  <div key={card.id} className="admin-list__item">
-                    <div className="admin-list__content">
-                      <h4>{card.label}</h4>
-                      <p>{card.description}</p>
-                    </div>
-                    <div className="admin-list__actions">
-                      <button
-                        onClick={() => editCard(card, "spare-parts")}
-                        className="admin-button admin-button--secondary admin-button--small"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => deleteCard(card.id, "spare-parts", card.label)}
-                        className="admin-button admin-button--danger admin-button--small"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === "overview" && (
-          <div className="admin-section">
-            <h2 className="admin-section__title">Website Overview</h2>
-            <div className="admin-stats">
-              <div className="admin-stat">
-                <h3>Navbar Options</h3>
-                <p className="admin-stat__number">{adminData.options.length}</p>
-              </div>
-              <div className="admin-stat">
-                <h3>Our Purpose Cards</h3>
-                <p className="admin-stat__number">{adminData.ourPurposeItems.length}</p>
-              </div>
-              <div className="admin-stat">
-                <h3>Featured Products</h3>
-                <p className="admin-stat__number">{adminData.featuredProducts.length}</p>
-              </div>
-              <div className="admin-stat">
-                <h3>Spare Parts</h3>
-                <p className="admin-stat__number">{adminData.sparePartsSection.length}</p>
-              </div>
-            </div>
-
-            <div className="admin-actions">
-              <h3>Quick Actions</h3>
-              <div className="admin-actions__grid">
-                <button onClick={() => setActiveTab("navbar")} className="admin-button admin-button--primary">
-                  Manage Navbar
-                </button>
-                <button onClick={() => setActiveTab("cards")} className="admin-button admin-button--primary">
-                  Manage Cards
-                </button>
-                <button onClick={exportData} className="admin-button admin-button--secondary">
-                  Export All Data
-                </button>
-                <button onClick={() => navigate("/home")} className="admin-button admin-button--secondary">
-                  View Website
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
