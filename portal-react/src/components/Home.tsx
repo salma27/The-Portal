@@ -1,7 +1,10 @@
+"use client"
+
 import type React from "react"
 import { useState, useEffect } from "react"
 import "../css/Home.css"
 import Carousel from "./Carousel"
+import Footer from "./Footer"
 import { words, ourPurposeCaroueslItems, featuredProducts } from "../data"
 
 const Home: React.FC = () => {
@@ -84,15 +87,17 @@ const Home: React.FC = () => {
       </div>
 
       {/* Featured Products Section */}
-      <div id="our-purpose" className="our-purpose-section">
-        
-      <Carousel
-        items={featuredProducts}
-        title="Featured Products"
-        description="Discover our premium electrical solutions designed for industrial excellence and reliability."
-        type="featured-products"
-      />
+      <div id="featured-products" className="our-purpose-section">
+        <Carousel
+          items={featuredProducts}
+          title="Featured Products"
+          description="Discover our premium electrical solutions designed for industrial excellence and reliability."
+          type="featured-products"
+        />
       </div>
+
+      {/* Footer */}
+      <Footer />
     </>
   )
 }
