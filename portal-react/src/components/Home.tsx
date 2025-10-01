@@ -6,6 +6,7 @@ import "../css/Home.css"
 import Carousel from "./Carousel"
 import Footer from "./Footer"
 import { words, ourPurposeCaroueslItems, featuredProducts } from "../data"
+import ClientLogosCarousel from "./ClientLogosCarousel"
 
 const Home: React.FC = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
@@ -94,6 +95,9 @@ const Home: React.FC = () => {
           description="Discover our premium electrical solutions designed for industrial excellence and reliability."
           type="featured-products"
         />
+      </div>
+      <div>
+        <ClientLogosCarousel />
       </div>
 
       {/* Footer */}

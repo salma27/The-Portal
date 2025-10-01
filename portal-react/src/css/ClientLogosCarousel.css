@@ -1,0 +1,232 @@
+.client-logos-carousel {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  overflow: hidden;
+}
+
+.client-logos-carousel__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.client-logos-carousel__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.client-logos-carousel__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fffc52 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.client-logos-carousel__subtitle {
+  font-size: 1.1rem;
+  color: #d1d5db;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.client-logos-carousel__track-container {
+  position: relative;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.client-logos-carousel__fade-left,
+.client-logos-carousel__fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.client-logos-carousel__fade-left {
+  left: 0;
+  background: linear-gradient(to right, #1f2937, transparent);
+}
+
+.client-logos-carousel__fade-right {
+  right: 0;
+  background: linear-gradient(to left, #1f2937, transparent);
+}
+
+.client-logos-carousel__track {
+  display: flex;
+  animation: scroll 30s linear infinite;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.client-logos-carousel__track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.client-logos-carousel__item {
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.client-logos-carousel__item:hover {
+  transform: scale(1.05);
+}
+
+.client-logos-carousel__logo-container {
+  position: relative;
+  width: 180px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.client-logos-carousel__logo-container:hover {
+  box-shadow: 0 8px 30px rgba(255, 252, 82, 0.3);
+  border: 2px solid rgba(255, 252, 82, 0.5);
+}
+
+.client-logos-carousel__logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.client-logos-carousel__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.95) 0%, rgba(72, 114, 201, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.client-logos-carousel__logo-container:hover .client-logos-carousel__overlay {
+  opacity: 1;
+}
+
+.client-logos-carousel__logo-container:hover .client-logos-carousel__logo {
+  opacity: 0;
+}
+
+.client-logos-carousel__overlay-content {
+  color: white;
+}
+
+.client-logos-carousel__client-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fffc52;
+}
+
+.client-logos-carousel__sector {
+  font-size: 0.85rem;
+  color: #d1d5db;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.client-logos-carousel__cta {
+  font-size: 0.8rem;
+  color: white;
+  background: rgba(255, 252, 82, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 252, 82, 0.3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.client-logos-carousel__footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.client-logos-carousel__footer-text {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .client-logos-carousel__title {
+    font-size: 2rem;
+  }
+
+  .client-logos-carousel__subtitle {
+    font-size: 1rem;
+  }
+
+  .client-logos-carousel__logo-container {
+    width: 150px;
+    height: 80px;
+  }
+
+  .client-logos-carousel__track {
+    gap: 1.5rem;
+  }
+
+  .client-logos-carousel__fade-left,
+  .client-logos-carousel__fade-right {
+    width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .client-logos-carousel {
+    padding: 3rem 0;
+  }
+
+  .client-logos-carousel__container {
+    padding: 0 1rem;
+  }
+
+  .client-logos-carousel__title {
+    font-size: 1.75rem;
+  }
+
+  .client-logos-carousel__logo-container {
+    width: 130px;
+    height: 70px;
+  }
+
+  .client-logos-carousel__track {
+    gap: 1rem;
+  }
+}
