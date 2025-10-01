@@ -1,4 +1,4 @@
-import type { Option, CarouselItem, Card } from "./interfaces"
+import type { Option, CarouselItem, Card, Testimonial } from "./interfaces"
 
 export const words = ["MV SWITCHGEAR", "MV TRANSFORMERS", "LV SWITCHGEAR", "MV SERVICE", "LV SERVICE", "MV SPARE PARTS"]
 
@@ -385,5 +385,87 @@ export const featuredProducts: CarouselItem[] = [
     href: "#instrument-transformer",
     description:
       "Precision instrument transformers for accurate measurement and protection in electrical power systems.",
+  },
+]
+
+// Testimonials Data
+export const testimonials: Testimonial[] = [
+  {
+    id: "cemex-egypt",
+    clientName: "Cemex Egypt",
+    sector: "Ready-Mix Concrete Production",
+    logo: "/cemex-logo.jpg",
+    challenge:
+      "Cemex Egypt encountered reliability issues with their medium voltage circuit breakers of Russian origin, which had become faulty. Due to budget limitations, replacing the entire switchgear was not an option. A more cost-effective and efficient solution was needed to maintain operations and minimize production downtime.",
+    solution:
+      "Pro Serve provided a complete retrofit solution using ABB HD4 circuit breakers. This approach allowed the client to replace the faulty breakers without changing the existing switchgear, significantly reducing both cost and time. The retrofit strategy successfully minimized shutdown time by nearly 90%, enabling continued operations with minimal disruption.",
+    productsUsed: ["ABB HD4 Circuit Breakers"],
+    servicesProvided: [
+      "Breaker Retrofit",
+      "Breaker Timing Test",
+      "Contact Resistance Test",
+      "Factory Acceptance Test (FAT)",
+      "On-Site Installation with Planned Shutdown",
+    ],
+    projectDuration: "2 weeks from site measurements to installation",
+    testimonialQuote:
+      "The retrofit process was seamless. Pro Serve's team worked around our operational hours and collected measurements needed for the retrofit process without affecting factory activities. They completed the final retrofit product in their workshop, followed by an invitation to attend the FAT test for the breakers, and finally installed the breakers in the switchgear with a pre-planned shutdown of only 10 minutes per breaker. Their flexibility and technical skill were exactly what we needed.",
+    testimonialAuthor: "Maintenance Manager",
+    testimonialPosition: "Cemex Egypt",
+  },
+  {
+    id: "dar-el-fouad-hospital",
+    clientName: "Dar El Fouad Hospital",
+    sector: "Healthcare",
+    logo: "/dar-el-fouad-hospital-logo.jpg",
+    challenge:
+      "The hospital's low voltage (LV) side lacked redundancy due to an initial design error. A short circuit in the LV busbar had a critical impact, triggering upstream medium voltage protection and disrupting the transformer. This posed a major risk to continuous power supply — a vital need in a healthcare facility.",
+    solution:
+      "Pro Serve conducted a thorough technical study and implemented a solution by re-routing cables between two independent power sources, effectively introducing redundancy without major infrastructural changes. In addition, comprehensive preventive maintenance and electrical testing were performed to enhance the reliability and safety of the system.",
+    productsUsed: [
+      "Medium Voltage Cables",
+      "Breaker Timing & Contact Resistance Tester",
+      "Transformer Turns Ratio & Winding Resistance Tester",
+    ],
+    servicesProvided: ["Preventive Maintenance", "Electrical Testing", "Network Redundancy Engineering"],
+    projectDuration: "2 Days",
+    testimonialQuote:
+      "Pro Serve delivered exactly what they promised — a major electrical upgrade without interfering with patient care. Lacking redundancy in the LV side of the network due to an initial design mistake made it difficult to maintain normal electricity flow, often requiring the use of generators. Pro Serve's technical study found a way around this by shifting cables between two independent sources, effectively resolving the issue. Their preventive maintenance and testing made a real difference in keeping our system compliant and reliable.",
+    testimonialAuthor: "Facilities Manager",
+    testimonialPosition: "Dar El Fouad Hospital",
+  },
+  {
+    id: "giza-systems",
+    clientName: "Giza Systems",
+    sector: "Corporate Headquarters",
+    logo: "/giza-systems-logo.jpg",
+    challenge:
+      "The facility lacked a low voltage coupler to automatically switch between the generator input and the normal utility network, requiring manual intervention during power outages. This created unnecessary delays and operational risk. Additionally, the two incoming panels were located in separate rooms, making integration more complex.",
+    solution:
+      "Pro Serve engineered and installed an ABB low voltage panel extension with a built-in coupler system, allowing automatic transfer between power sources. The team provided a detailed cable routing and panel placement plan in advance, ensuring clarity and minimal disruption. Despite logistical challenges, all work was completed during night shifts to avoid interfering with daytime operations.",
+    productsUsed: ["Low Voltage Panel", "Low Voltage Cables"],
+    servicesProvided: ["ABB Low Voltage Panel Extension"],
+    projectDuration: "2 Days",
+    testimonialQuote:
+      "Pro Serve gave 110% effort in resolving a major network issue where our generator had to be operated manually whenever the normal network went offline. The challenge of having each incoming panel in a different room was no issue for Pro Serve's technical team. They submitted pre-drawn plans showing how the cables would be linked and where the fabricated panel for the coupler would be installed to implement a 2-out-of-3 logic. Their flexibility to work night shifts to avoid daytime disruptions was a big plus for a seamless process.",
+    testimonialAuthor: "Facilities Manager",
+    testimonialPosition: "Giza Systems",
+  },
+  {
+    id: "hilton-heliopolis",
+    clientName: "Hilton Heliopolis",
+    sector: "Hospitality",
+    logo: "/hilton-heliopolis-logo.jpg",
+    challenge:
+      "The hotel's medium voltage switchgear was equipped with outdated 20-year-old protection relays, many of which had no available technical documentation. Upgrading to a modern, reliable solution was essential to ensure continued safety and performance without full panel replacement.",
+    solution:
+      "Pro Serve successfully upgraded the legacy protection system by implementing ABB's state-of-the-art Relion REF615 relays. Through advanced testing and functional analysis, the team reverse-engineered the old relay logic and consolidated multiple functions into modern single-unit devices. The new relays were configured, installed, and tested on-site to ensure full compliance with current protection requirements—all completed within a tight three-day window.",
+    productsUsed: ["ABB Relion REF615 Protection Relays"],
+    servicesProvided: ["ABB Medium Voltage Relay Upgrade", "Functional Testing & Commissioning"],
+    projectDuration: "3 Days",
+    testimonialQuote:
+      "Pro Serve's highly technical team provided a major cost- and time-efficient upgrade for our 20-year-old relays. Despite the lack of documentation for the old units, they tested, analyzed, and replicated the necessary functions, integrating several relays into one modern solution. All functions were tested to ensure the protection requirements were met. A very professional job.",
+    testimonialAuthor: "Facilities Manager",
+    testimonialPosition: "Hilton Heliopolis",
   },
 ]

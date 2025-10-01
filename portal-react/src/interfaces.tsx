@@ -53,3 +53,18 @@ export interface CardProps {
   item: CarouselItem | Card
   type?: "our-purpose" | "featured-products" | "section" | "detail"
 }
+
+export interface Testimonial {
+  id: string
+  clientName: string
+  sector: string
+  logo: string
+  challenge: string
+  solution: string
+  productsUsed: string[]
+  servicesProvided: string[]
+  projectDuration: string
+  testimonialQuote: string
+  testimonialAuthor: string
+  testimonialPosition: string
+}
