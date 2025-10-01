@@ -62,11 +62,11 @@ export const options: Option[] = [
     dropdown: [
       {id: "testimonials", 
        label: "Testimonials",
-       href: "/refrences/testimonials"
+       href: "/references/testimonials"
       },
       {id: "blogs",
         label: "Blogs",
-        href:"/refrences/blogs"
+        href:"/references/blogs"
       }
     ]
   }
