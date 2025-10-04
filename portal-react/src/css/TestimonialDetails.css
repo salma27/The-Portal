@@ -151,6 +151,47 @@
   color: #1f2937;
 }
 
+/* Project Image Section */
+.testimonial-details__project-image {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.testimonial-details__image-container {
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-details__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .testimonial-details__image {
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-details__project-image {
+    padding: 1.5rem;
+  }
+
+  .testimonial-details__image {
+    max-height: 250px;
+  }
+}
+
 /* Main Grid */
 .testimonial-details__main-grid {
   display: grid;

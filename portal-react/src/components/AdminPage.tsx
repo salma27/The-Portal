@@ -5,14 +5,21 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Footer from "./Footer"
 import "../css/AdminPage.css"
-import type { Option, CarouselItem, Card } from "../interfaces"
-import { options as initialOptions, ourPurposeCaroueslItems, featuredProducts, sparePartsSection } from "../data"
+import type { Option, CarouselItem, Card, Testimonial } from "../interfaces"
+import {
+  options as initialOptions,
+  ourPurposeCaroueslItems,
+  featuredProducts,
+  sparePartsSection,
+  testimonials as initialTestimonials,
+} from "../data"
 
 interface AdminData {
   options: Option[]
   ourPurposeItems: CarouselItem[]
   featuredProducts: CarouselItem[]
   sparePartsSection: Card[]
+  testimonials: Testimonial[]
 }
 
 interface ConfirmDialogProps {
@@ -67,6 +74,7 @@ const AdminPage: React.FC = () => {
     ourPurposeItems: ourPurposeCaroueslItems,
     featuredProducts: featuredProducts,
     sparePartsSection: sparePartsSection,
+    testimonials: initialTestimonials,
   })
 
   // Form states
@@ -90,20 +98,49 @@ const AdminPage: React.FC = () => {
     type: "our-purpose" as "our-purpose" | "featured-products" | "spare-parts",
   })
 
+  const [testimonialForm, setTestimonialForm] = useState({
+    id: "",
+    clientName: "",
+    sector: "",
+    logo: "",
+    projectImage: "",
+    challenge: "",
+    solution: "",
+    productsUsed: "",
+    servicesProvided: "",
+    projectDuration: "",
+    testimonialQuote: "",
+    testimonialAuthor: "",
+    testimonialPosition: "",
+  })
+
   const [editingItem, setEditingItem] = useState<any>(null)
 
   // Load saved data from localStorage
   useEffect(() => {
     const savedData = localStorage.getItem("adminData")
     if (savedData) {
-      setAdminData(JSON.parse(savedData))
+      try {
+        const parsed = JSON.parse(savedData)
+        // Ensure testimonials array exists even in old saved data
+        setAdminData({
+          ...parsed,
+          testimonials: parsed.testimonials || initialTestimonials,
+        })
+      } catch (error) {
+        console.error("Error loading saved data:", error)
+      }
     }
   }, [])
 
   // Save data to localStorage
   const saveData = (newData: AdminData) => {
-    setAdminData(newData)
-    localStorage.setItem("adminData", JSON.stringify(newData))
+    const dataToSave = {
+      ...newData,
+      testimonials: newData.testimonials || [],
+    }
+    setAdminData(dataToSave)
+    localStorage.setItem("adminData", JSON.stringify(dataToSave))
   }
 
   // Confirmation dialog helpers
@@ -333,6 +370,110 @@ const AdminPage: React.FC = () => {
     })
   }
 
+  // Testimonial management
+  const addTestimonial = () => {
+    const newTestimonial: Testimonial = {
+      id: testimonialForm.id || `testimonial-${Date.now()}`,
+      clientName: testimonialForm.clientName,
+      sector: testimonialForm.sector,
+      logo: testimonialForm.logo,
+      projectImage: testimonialForm.projectImage || undefined,
+      challenge: testimonialForm.challenge,
+      solution: testimonialForm.solution,
+      productsUsed: testimonialForm.productsUsed.split("\n").filter((p) => p.trim()),
+      servicesProvided: testimonialForm.servicesProvided.split("\n").filter((s) => s.trim()),
+      projectDuration: testimonialForm.projectDuration,
+      testimonialQuote: testimonialForm.testimonialQuote,
+      testimonialAuthor: testimonialForm.testimonialAuthor,
+      testimonialPosition: testimonialForm.testimonialPosition,
+    }
+
+    const newData = {
+      ...adminData,
+      testimonials: [...adminData.testimonials, newTestimonial],
+    }
+    saveData(newData)
+    resetTestimonialForm()
+  }
+
+  const editTestimonial = (testimonial: Testimonial) => {
+    setTestimonialForm({
+      id: testimonial.id,
+      clientName: testimonial.clientName,
+      sector: testimonial.sector,
+      logo: testimonial.logo,
+      projectImage: testimonial.projectImage || "",
+      challenge: testimonial.challenge,
+      solution: testimonial.solution,
+      productsUsed: testimonial.productsUsed.join("\n"),
+      servicesProvided: testimonial.servicesProvided.join("\n"),
+      projectDuration: testimonial.projectDuration,
+      testimonialQuote: testimonial.testimonialQuote,
+      testimonialAuthor: testimonial.testimonialAuthor,
+      testimonialPosition: testimonial.testimonialPosition,
+    })
+    setEditingItem(testimonial)
+  }
+
+  const updateTestimonial = () => {
+    const updatedTestimonial: Testimonial = {
+      id: testimonialForm.id,
+      clientName: testimonialForm.clientName,
+      sector: testimonialForm.sector,
+      logo: testimonialForm.logo,
+      projectImage: testimonialForm.projectImage || undefined,
+      challenge: testimonialForm.challenge,
+      solution: testimonialForm.solution,
+      productsUsed: testimonialForm.productsUsed.split("\n").filter((p) => p.trim()),
+      servicesProvided: testimonialForm.servicesProvided.split("\n").filter((s) => s.trim()),
+      projectDuration: testimonialForm.projectDuration,
+      testimonialQuote: testimonialForm.testimonialQuote,
+      testimonialAuthor: testimonialForm.testimonialAuthor,
+      testimonialPosition: testimonialForm.testimonialPosition,
+    }
+
+    const newData = {
+      ...adminData,
+      testimonials: adminData.testimonials.map((t) => (t.id === editingItem.id ? updatedTestimonial : t)),
+    }
+
+    saveData(newData)
+    resetTestimonialForm()
+    setEditingItem(null)
+  }
+
+  const deleteTestimonial = (id: string, clientName: string) => {
+    showConfirmDialog(
+      "Delete Testimonial",
+      `Are you sure you want to delete the testimonial from "${clientName}"? This action cannot be undone.`,
+      () => {
+        const newData = {
+          ...adminData,
+          testimonials: adminData.testimonials.filter((t) => t.id !== id),
+        }
+        saveData(newData)
+      },
+    )
+  }
+
+  const resetTestimonialForm = () => {
+    setTestimonialForm({
+      id: "",
+      clientName: "",
+      sector: "",
+      logo: "",
+      projectImage: "",
+      challenge: "",
+      solution: "",
+      productsUsed: "",
+      servicesProvided: "",
+      projectDuration: "",
+      testimonialQuote: "",
+      testimonialAuthor: "",
+      testimonialPosition: "",
+    })
+  }
+
   // Export/Import data
   const exportData = () => {
     const dataStr = JSON.stringify(adminData, null, 2)
@@ -447,6 +588,12 @@ const AdminPage: React.FC = () => {
               onClick={() => setActiveTab("cards")}
             >
               Content Cards
+            </button>
+            <button
+              className={`admin-tab ${activeTab === "testimonials" ? "active" : ""}`}
+              onClick={() => setActiveTab("testimonials")}
+            >
+              Testimonials
             </button>
             <button
               className={`admin-tab ${activeTab === "overview" ? "active" : ""}`}
@@ -818,6 +965,178 @@ const AdminPage: React.FC = () => {
               </div>
             )}
 
+            {activeTab === "testimonials" && (
+              <div className="admin-section">
+                <h3 className="admin-section__title">Testimonials Management</h3>
+
+                <div className="admin-form">
+                  <h4>{editingItem ? "Edit Testimonial" : "Add New Testimonial"}</h4>
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Client Name *"
+                      value={testimonialForm.clientName}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, clientName: e.target.value })}
+                      className="admin-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Sector *"
+                      value={testimonialForm.sector}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, sector: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Logo URL *"
+                      value={testimonialForm.logo}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, logo: e.target.value })}
+                      className="admin-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Project Image URL (optional)"
+                      value={testimonialForm.projectImage}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, projectImage: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Challenge *"
+                      value={testimonialForm.challenge}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, challenge: e.target.value })}
+                      className="admin-textarea"
+                      rows={4}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Solution *"
+                      value={testimonialForm.solution}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, solution: e.target.value })}
+                      className="admin-textarea"
+                      rows={4}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Products Used (one per line) *"
+                      value={testimonialForm.productsUsed}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, productsUsed: e.target.value })}
+                      className="admin-textarea"
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Services Provided (one per line) *"
+                      value={testimonialForm.servicesProvided}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, servicesProvided: e.target.value })}
+                      className="admin-textarea"
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Project Duration *"
+                      value={testimonialForm.projectDuration}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, projectDuration: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <textarea
+                      placeholder="Testimonial Quote *"
+                      value={testimonialForm.testimonialQuote}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, testimonialQuote: e.target.value })}
+                      className="admin-textarea"
+                      rows={4}
+                    />
+                  </div>
+
+                  <div className="admin-form__row">
+                    <input
+                      type="text"
+                      placeholder="Testimonial Author *"
+                      value={testimonialForm.testimonialAuthor}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, testimonialAuthor: e.target.value })}
+                      className="admin-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Author Position *"
+                      value={testimonialForm.testimonialPosition}
+                      onChange={(e) => setTestimonialForm({ ...testimonialForm, testimonialPosition: e.target.value })}
+                      className="admin-input"
+                    />
+                  </div>
+
+                  <div className="admin-form__actions">
+                    {editingItem ? (
+                      <>
+                        <button onClick={updateTestimonial} className="admin-button admin-button--primary">
+                          Update Testimonial
+                        </button>
+                        <button
+                          onClick={() => {
+                            setEditingItem(null)
+                            resetTestimonialForm()
+                          }}
+                          className="admin-button admin-button--secondary"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <button onClick={addTestimonial} className="admin-button admin-button--primary">
+                        Add Testimonial
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className="admin-list">
+                  <h3>Current Testimonials ({adminData.testimonials.length})</h3>
+                  {adminData.testimonials.map((testimonial) => (
+                    <div key={testimonial.id} className="admin-list__item">
+                      <div className="admin-list__content">
+                        <h4>{testimonial.clientName}</h4>
+                        <p>Sector: {testimonial.sector}</p>
+                        <p>Duration: {testimonial.projectDuration}</p>
+                        <p>{testimonial.challenge.substring(0, 100)}...</p>
+                      </div>
+                      <div className="admin-list__actions">
+                        <button
+                          onClick={() => editTestimonial(testimonial)}
+                          className="admin-button admin-button--secondary admin-button--small"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteTestimonial(testimonial.id, testimonial.clientName)}
+                          className="admin-button admin-button--danger admin-button--small"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {activeTab === "overview" && (
               <div className="admin-section">
                 <h3 className="admin-section__title">Website Overview</h3>
@@ -838,6 +1157,10 @@ const AdminPage: React.FC = () => {
                     <h3>Spare Parts</h3>
                     <p className="admin-stat__number">{adminData.sparePartsSection.length}</p>
                   </div>
+                  <div className="admin-stat">
+                    <h3>Testimonials</h3>
+                    <p className="admin-stat__number">{adminData.testimonials.length}</p>
+                  </div>
                 </div>
 
                 <div className="admin-actions">
@@ -848,6 +1171,9 @@ const AdminPage: React.FC = () => {
                     </button>
                     <button onClick={() => setActiveTab("cards")} className="admin-button admin-button--primary">
                       Manage Content
+                    </button>
+                    <button onClick={() => setActiveTab("testimonials")} className="admin-button admin-button--primary">
+                      Manage Testimonials
                     </button>
                     <button onClick={exportData} className="admin-button admin-button--secondary">
                       Export All Data

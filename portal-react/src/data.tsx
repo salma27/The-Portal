@@ -393,8 +393,9 @@ export const testimonials: Testimonial[] = [
   {
     id: "cemex-egypt",
     clientName: "Cemex Egypt",
+    projectImage: "/assets/home/products.png",
     sector: "Ready-Mix Concrete Production",
-    logo: "/cemex-logo.jpg",
+    logo: "/assets/home/products.png",
     challenge:
       "Cemex Egypt encountered reliability issues with their medium voltage circuit breakers of Russian origin, which had become faulty. Due to budget limitations, replacing the entire switchgear was not an option. A more cost-effective and efficient solution was needed to maintain operations and minimize production downtime.",
     solution:

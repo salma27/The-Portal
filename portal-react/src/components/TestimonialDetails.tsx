@@ -72,6 +72,20 @@ const TestimonialDetails: React.FC = () => {
             </div>
           </div>
 
+          {/* Project Image */}
+          {testimonial.projectImage && (
+            <div className="testimonial-details__project-image">
+              <h2 className="testimonial-details__section-title">Project Showcase</h2>
+              <div className="testimonial-details__image-container">
+                <img
+                  src={testimonial.projectImage || "/placeholder.svg"}
+                  alt={`${testimonial.clientName} project`}
+                  className="testimonial-details__image"
+                />
+              </div>
+            </div>
+          )}
+
           {/* Challenge & Solution */}
           <div className="testimonial-details__main-grid">
             <div className="testimonial-details__card">
@@ -120,7 +134,7 @@ const TestimonialDetails: React.FC = () => {
 
           {/* Testimonial Quote */}
           <div className="testimonial-details__quote-section">
-            <div className="testimonial-details__quote-icon">"</div>
+            <div className="testimonial-details__quote-icon"></div>
             <blockquote className="testimonial-details__quote">{testimonial.testimonialQuote}</blockquote>
             <div className="testimonial-details__quote-author">
               <p className="testimonial-details__author-name">{testimonial.testimonialAuthor}</p>

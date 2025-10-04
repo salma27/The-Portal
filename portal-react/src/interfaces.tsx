@@ -23,14 +23,14 @@ export interface Card {
   image: string
   href: string
   description?: string
-  fullDescription?: string[] // Full paragraph description for ProductDetails
-  keywords?: string[] // Keywords for the product
-  whyItMatters?: string[]
-  advantages?: string[] // List of advantages
-  scope?: string[]
+  fullDescription?: string[]
+  keywords?: string[]
+  advantages?: string[]
   solutions?: string[]
   comments?: string[]
-  items?: Card[] // Infinite nesting - can contain more cards with their own items
+  whyItMatters?: string[]
+  scope?: string[]
+  items?: Card[]
 }
 
 export interface CarouselItem {
@@ -59,6 +59,7 @@ export interface Testimonial {
   clientName: string
   sector: string
   logo: string
+  projectImage?: string // Add this new field for project photos
   challenge: string
   solution: string
   productsUsed: string[]
@@ -67,4 +68,8 @@ export interface Testimonial {
   testimonialQuote: string
   testimonialAuthor: string
   testimonialPosition: string
+}
+
+export interface AdminData {
+  testimonials: Testimonial[]
 }
